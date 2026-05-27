@@ -1,6 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { CHATBOT_SYSTEM_PROMPT } from '@/lib/chatbot-knowledge'
 
+// In production (Amplify), these are compiled in at build time via amplify.yml.
+// Locally, fall back to process.env so .env.local still works.
+let LLM_BASE_URL: string
+let LLM_MODEL: string
+let LLM_API_KEY: string
+
+try {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const cfg = require('@/generated/config')
+  LLM_BASE_URL = cfg.LLM_BASE_URL || process.env.LLM_BASE_URL || ''
+  LLM_MODEL    = cfg.LLM_MODEL    || process.env.LLM_MODEL    || ''
+  LLM_API_KEY  = cfg.LLM_API_KEY  || process.env.LLM_API_KEY  || ''
+} catch {
+  LLM_BASE_URL = process.env.LLM_BASE_URL || ''
+  LLM_MODEL    = process.env.LLM_MODEL    || ''
+  LLM_API_KEY  = process.env.LLM_API_KEY  || ''
+}
+
 export interface ChatMessage {
   role: 'user' | 'assistant'
   content: string
@@ -14,11 +32,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
     }
 
-    const baseUrl = process.env.LLM_BASE_URL
-    const model   = process.env.LLM_MODEL
-    const apiKey  = process.env.LLM_API_KEY
-
-    if (!baseUrl || !model || !apiKey) {
+    if (!LLM_BASE_URL || !LLM_MODEL || !LLM_API_KEY) {
       return NextResponse.json({
         message:
           "Hi! I'm Echo, Apoorav's assistant — I'm not fully connected yet. " +
@@ -26,14 +40,14 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    const response = await fetch(`${baseUrl}/chat/completions`, {
+    const response = await fetch(`${LLM_BASE_URL}/chat/completions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${LLM_API_KEY}`,
       },
       body: JSON.stringify({
-        model,
+        model: LLM_MODEL,
         messages: [
           { role: 'system', content: CHATBOT_SYSTEM_PROMPT },
           ...messages,

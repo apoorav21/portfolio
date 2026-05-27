@@ -31,3 +31,6 @@ npm-debug.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Generated at build time — contains secrets, never commit
+src/generated/config.ts
