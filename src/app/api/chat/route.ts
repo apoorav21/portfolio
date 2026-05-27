@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
           { role: 'system', content: CHATBOT_SYSTEM_PROMPT },
           ...messages,
         ],
-        max_tokens: 500,
+        max_tokens: 8000,  // reasoning models need room to think before responding
         temperature: 0.7,
       }),
     })
@@ -67,7 +67,11 @@ export async function POST(req: NextRequest) {
     }
 
     const data = await response.json()
-    const reply = data.choices?.[0]?.message?.content ?? "I'm not sure how to answer that!"
+    const msg = data.choices?.[0]?.message
+    // Reasoning models (e.g. kimi-k2) put the final answer in content and
+    // their thinking in reasoning_content. Fall back to reasoning_content
+    // if content is empty (shouldn't happen with enough max_tokens, but just in case).
+    const reply = msg?.content || msg?.reasoning_content || "I'm not sure how to answer that!"
 
     return NextResponse.json({ message: reply })
   } catch (err) {
