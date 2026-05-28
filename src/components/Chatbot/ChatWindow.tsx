@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Send, X } from 'lucide-react'
 import type { ChatMessage } from '@/app/api/chat/route'
@@ -19,6 +19,17 @@ interface Props {
 }
 
 export default function ChatWindow({ onClose, onThinking }: Props) {
+  // Stable session ID per browser tab — persisted in sessionStorage
+  const sessionId = useMemo(() => {
+    if (typeof window === 'undefined') return ''
+    const key = 'echo_session_id'
+    const existing = sessionStorage.getItem(key)
+    if (existing) return existing
+    const id = crypto.randomUUID()
+    sessionStorage.setItem(key, id)
+    return id
+  }, [])
+
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
@@ -51,7 +62,7 @@ export default function ChatWindow({ onClose, onThinking }: Props) {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({ messages: newMessages, sessionId }),
       })
       const data = await res.json()
       const reply = data.message || data.error || "Sorry, couldn't connect. Email apooravrao@gmail.com!"
