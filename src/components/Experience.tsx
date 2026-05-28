@@ -28,6 +28,7 @@ const impactStats = [
 const achievementItems = [
   { icon: '🥈', title: '2nd Prize — Collegiate Hackathon', desc: 'Problem-solving, coding, and innovation track.' },
   { icon: '🏆', title: 'Top-10 Finalist — IIM Ahmedabad × Ashoka University', desc: 'National hackathon — selected in the top 10 teams out of hundreds of applicants.' },
+  { icon: '⚡', title: '550+ problems solved on Codeforces', desc: 'Competitive programming — graphs, DP, greedy, combinatorics.', link: 'https://codeforces.com/profile/apoorav_rao' },
 ]
 
 export default function Experience() {
@@ -54,7 +55,7 @@ export default function Experience() {
           <motion.div variants={fadeUp} style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 28, padding: '22px 0', borderTop: 'none' }} className="exp-card-grid">
             {/* Meta */}
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-mute)', letterSpacing: '0.04em' }}>
-              <span style={{ color: 'var(--accent)', display: 'block', marginBottom: 6 }}>Jun 2024 — Mar 2025</span>
+              <span style={{ color: 'var(--accent)', display: 'block', marginBottom: 6 }}>Jun 2025 — Mar 2026</span>
               Internship · 10 months
             </div>
 
@@ -137,9 +138,22 @@ export default function Experience() {
                     <span>{a.icon}</span>
                     {a.desc}
                   </span>
-                  <span style={{ fontFamily: 'var(--font-display)', fontSize: 17, color: 'var(--text)', textAlign: 'right', maxWidth: '50%' }}>
-                    {a.title}
-                  </span>
+                  {'link' in a ? (
+                    <a
+                      href={a.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ fontFamily: 'var(--font-display)', fontSize: 17, color: 'var(--accent)', textAlign: 'right', maxWidth: '50%', textDecoration: 'none' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
+                      onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                    >
+                      {a.title} ↗
+                    </a>
+                  ) : (
+                    <span style={{ fontFamily: 'var(--font-display)', fontSize: 17, color: 'var(--text)', textAlign: 'right', maxWidth: '50%' }}>
+                      {a.title}
+                    </span>
+                  )}
                 </div>
               ))}
             </div>

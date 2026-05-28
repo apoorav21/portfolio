@@ -46,7 +46,7 @@ WORK EXPERIENCE
 ═══════════════════════════════════════════════════════════════
 
 Gen & Agentic AI Intern — Caterpillar Signs Pvt. Ltd. (Group Bayport)
-Gurugram, India · June 2024 – March 2025 · 10 months
+Gurugram, India · June 2025 – March 2026 · 10 months
 
 This was a real production internship, not academic work. He built an end-to-end
 LLM-powered data pipeline from scratch:
