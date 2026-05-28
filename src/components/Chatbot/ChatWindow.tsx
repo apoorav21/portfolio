@@ -6,11 +6,11 @@ import { Send, X } from 'lucide-react'
 import type { ChatMessage } from '@/app/api/chat/route'
 
 const SUGGESTED_QUESTIONS = [
-  "What's TrainFlow?",
-  "Tell me about your experience",
-  "What's your tech stack?",
   "Are you open to work?",
-  "Tell me about your AI projects",
+  "What AI agents have you built?",
+  "Tell me about your internship",
+  "What's your tech stack?",
+  "Tell me something about Apoorav beyond the resume",
 ]
 
 interface Props {
@@ -22,7 +22,7 @@ export default function ChatWindow({ onClose, onThinking }: Props) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: "Hey 👋 I'm Echo — Apoorav's AI agent. I know everything about his projects, skills, and background. What would you like to know?",
+      content: "Hey 👋 I'm Echo — Apoorav's personal AI. I know his full stack, every project he's built, his internship story, and what makes him tick. Ask me anything — projects, skills, availability, or just who he is as a person.",
     },
   ])
   const [input, setInput]         = useState('')

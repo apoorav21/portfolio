@@ -28,6 +28,14 @@ export default function Chatbot() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  /* ── Listen for openEcho events from Hero CTA ────────────────────── */
+  useEffect(() => {
+    function onOpenEcho() { if (!isOpen) handleOpen() }
+    window.addEventListener('openEcho', onOpenEcho)
+    return () => window.removeEventListener('openEcho', onOpenEcho)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen])
+
   /* ── Speech bubble ────────────────────────────────────────────────── */
   useEffect(() => {
     if (!introComplete || bubbleDismissed || isOpen) return
@@ -92,7 +100,7 @@ export default function Chatbot() {
             }}
           >
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text)', lineHeight: 1.45, margin: 0 }}>
-              👋 I&apos;m Echo — ask me anything about Apoorav!
+              👋 I&apos;m <b>Echo</b> — Apoorav&apos;s AI. Ask me about his projects, skills, or if he&apos;s hiring!
             </p>
           </motion.div>
         )}

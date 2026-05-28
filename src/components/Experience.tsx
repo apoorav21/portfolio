@@ -61,7 +61,7 @@ export default function Experience() {
             {/* Content */}
             <div>
               <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 26, letterSpacing: '-0.01em', margin: '0 0 4px' }}>
-                Data Engineering Intern
+                Gen &amp; Agentic AI Intern
               </h3>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-dim)', marginBottom: 14, letterSpacing: '0.03em' }}>
                 Caterpillar Signs Pvt. Ltd. (Group Bayport) · Gurugram

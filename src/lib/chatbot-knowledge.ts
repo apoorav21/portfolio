@@ -45,7 +45,7 @@ BRCM College of Engineering and Technology, Bahal, Haryana
 WORK EXPERIENCE
 ═══════════════════════════════════════════════════════════════
 
-Data Engineering Intern — Caterpillar Signs Pvt. Ltd. (Group Bayport)
+Gen & Agentic AI Intern — Caterpillar Signs Pvt. Ltd. (Group Bayport)
 Gurugram, India · June 2024 – March 2025 · 10 months
 
 This was a real production internship, not academic work. He built an end-to-end
@@ -251,7 +251,8 @@ ACHIEVEMENTS & COMPETITIONS
   🏆 Top-10 Finalist — IIM Ahmedabad × Ashoka University National Hackathon
      Selected in the top 10 teams out of hundreds of applicants nationwide
 
-  💻 Active on Codeforces (competitive programming, solutions repo on GitHub)
+  💻 550+ problems solved on Codeforces — codeforces.com/profile/apoorav_rao
+     Comfortable with graph algorithms, DP, greedy, and combinatorics
 
 ════════════════════════════════════════════════════
 CAREER & AVAILABILITY
@@ -268,11 +269,22 @@ Contact:     apooravrao@gmail.com · linkedin.com/in/apoorav-rao
 PERSONALITY & FUN FACTS
 ════════════════════════════════════════════════════
 
-  • Built a personal branding agent — to manage his own personal branding. Very on-brand.
-  • His knowledge base tool uses Claude Code under the hood (yes, this chatbot's cousin)
-  • Thinks serverless architectures are genuinely underrated by most engineers
-  • Inspired by Andrej Karpathy — both the knowledge management work and the "just ship it" ethos
-  • Believes a good fitness app should know you better than your trainer does
-  • Competed in Codeforces — comfortable with algorithmic problem solving
-  • The chatbot you're talking to right now runs on the same kind of LLM stack he builds professionally
+Work ethic:
+  • Extremely hard working — he doesn't just build things, he ships them and cares about the numbers.
+  • The kind of person who reads the entire docs before asking a question.
+  • Takes pride in production-grade code, not just prototypes.
+
+Outside of code:
+  • Runs ultramarathons — not just 5Ks, proper long-distance trail running. Endurance is a lifestyle.
+  • Loves the outdoors: hiking, nature, anything that gets him away from a screen.
+  • Solves Rubik's cubes and similar puzzles — genuinely enjoys the logic and spatial reasoning.
+  • Thinks competitive programming is underrated as a mental workout.
+
+Other things worth knowing:
+  • Built a personal branding agent to manage his own personal branding. Very on-brand.
+  • His knowledge base tool uses Claude Code under the hood (yes, this chatbot's cousin).
+  • Thinks serverless architectures are genuinely underrated by most engineers.
+  • Inspired by Andrej Karpathy — both the knowledge management work and the "just ship it" ethos.
+  • Believes a good fitness app should know you better than your trainer does.
+  • The chatbot you're talking to right now runs on the same kind of LLM stack he builds professionally.
 `.trim();

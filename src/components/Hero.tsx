@@ -128,40 +128,78 @@ export default function Hero() {
             <span>4+ shipped agents</span>
           </motion.div>
 
-          {/* CTAs */}
+          {/* Echo CTA — featured */}
+          <motion.div variants={item} style={{ marginTop: 36 }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 10,
+                background: 'var(--bg-2)',
+                border: '2px solid var(--accent)',
+                borderRadius: 16,
+                padding: '18px 28px',
+                boxShadow: '4px 4px 0px var(--accent-deep)',
+                maxWidth: 420,
+                width: '100%',
+                cursor: 'pointer',
+              }}
+              onClick={() => window.dispatchEvent(new CustomEvent('openEcho'))}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLDivElement).style.transform = 'translate(2px, 2px)'
+                ;(e.currentTarget as HTMLDivElement).style.boxShadow = '2px 2px 0px var(--accent-deep)'
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLDivElement).style.transform = 'none'
+                ;(e.currentTarget as HTMLDivElement).style.boxShadow = '4px 4px 0px var(--accent-deep)'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                {/* Echo avatar circle */}
+                <div style={{
+                  width: 40, height: 40, borderRadius: '50%',
+                  background: 'var(--accent)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 15, color: '#fff',
+                  flexShrink: 0,
+                  boxShadow: '0 0 12px var(--accent)',
+                }}>E</div>
+                <div style={{ textAlign: 'left' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.05em' }}>
+                    Talk to Echo — my AI agent ✦
+                  </div>
+                  <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text-dim)', marginTop: 2, lineHeight: 1.4 }}>
+                    Ask about my projects, skills, personality & availability
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+                {["What's TrainFlow?", "What's your tech stack?", "Are you open to work?"].map((q) => (
+                  <span
+                    key={q}
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 10.5,
+                      padding: '4px 10px',
+                      border: '1px solid var(--line)',
+                      borderRadius: 999,
+                      color: 'var(--text-mute)',
+                      letterSpacing: '0.02em',
+                    }}
+                  >{q}</span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Secondary CTAs */}
           <motion.div
             variants={item}
-            style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12, marginTop: 36 }}
+            style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12, marginTop: 16 }}
           >
             <a
               href="#projects"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 13,
-                padding: '11px 24px',
-                background: 'var(--accent)',
-                color: '#fff',
-                borderRadius: 10,
-                textDecoration: 'none',
-                letterSpacing: '0.04em',
-                fontWeight: 500,
-                transition: 'transform 0.1s, box-shadow 0.1s',
-                boxShadow: '3px 3px 0px var(--accent-deep)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translate(2px, 2px)'
-                e.currentTarget.style.boxShadow = '1px 1px 0px var(--accent-deep)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'none'
-                e.currentTarget.style.boxShadow = '3px 3px 0px var(--accent-deep)'
-              }}
-            >
-              View projects
-            </a>
-            <a
-              href="/resume.pdf"
-              download="Apoorav_Rao_Resume.pdf"
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: 13,
@@ -182,6 +220,32 @@ export default function Hero() {
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'none'
                 e.currentTarget.style.boxShadow = '3px 3px 0px var(--text)'
+              }}
+            >
+              View projects
+            </a>
+            <a
+              href="/resume.pdf"
+              download="Apoorav_Rao_Resume.pdf"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 13,
+                padding: '11px 24px',
+                background: 'transparent',
+                color: 'var(--text-dim)',
+                borderRadius: 10,
+                textDecoration: 'none',
+                letterSpacing: '0.04em',
+                border: '1px solid var(--line)',
+                transition: 'border-color 0.15s, color 0.15s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--accent)'
+                e.currentTarget.style.color = 'var(--accent)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--line)'
+                e.currentTarget.style.color = 'var(--text-dim)'
               }}
             >
               Download CV ↓
