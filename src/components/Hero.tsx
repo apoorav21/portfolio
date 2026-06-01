@@ -167,7 +167,7 @@ export default function Hero() {
                 }}>E</div>
                 <div style={{ textAlign: 'left' }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.05em' }}>
-                    Talk to Echo — my AI agent ✦
+                    Talk to me — AI version ✦
                   </div>
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text-dim)', marginTop: 2, lineHeight: 1.4 }}>
                     Ask about my projects, skills, personality & availability

@@ -100,7 +100,7 @@ export default function Chatbot() {
             }}
           >
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text)', lineHeight: 1.45, margin: 0 }}>
-              👋 I&apos;m <b>Echo</b> — Apoorav&apos;s AI. Ask me about his projects, skills, or if he&apos;s hiring!
+              👋 I&apos;m an AI version of Apoorav — ask me about my projects, skills, or availability!
             </p>
           </motion.div>
         )}

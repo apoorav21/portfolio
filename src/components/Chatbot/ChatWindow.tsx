@@ -33,7 +33,7 @@ export default function ChatWindow({ onClose, onThinking }: Props) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: "Hey 👋 I'm Echo — Apoorav's personal AI. I know his full stack, every project he's built, his internship story, and what makes him tick. Ask me anything — projects, skills, availability, or just who he is as a person.",
+      content: "Hey 👋 I'm Apoorav — well, an AI version of me. Ask me anything: my projects, my stack, what I'm looking for, or just who I am as a person.",
     },
   ])
   const [input, setInput]         = useState('')
@@ -121,7 +121,7 @@ export default function ChatWindow({ onClose, onThinking }: Props) {
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.06em', color: 'var(--text)', fontWeight: 500 }}>
-                Echo — Apoorav&apos;s AI
+                Apoorav — AI version
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10.5, color: 'var(--text-mute)', display: 'flex', alignItems: 'center', gap: 5 }}>
                 <span style={{ display: 'inline-block', width: 5, height: 5, borderRadius: '50%', background: '#5cb85c' }} />
