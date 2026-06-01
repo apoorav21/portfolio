@@ -169,62 +169,15 @@ function Wrap({ children, style }: { children: React.ReactNode; style?: React.CS
 function Dashboard() {
   const [active, setActive] = useState(0)
   const [fading, setFading] = useState(false)
-  const [autoPlayed, setAutoPlayed] = useState(false)
-  const [userTookOver, setUserTookOver] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const timersRef  = useRef<ReturnType<typeof setTimeout>[]>([])
-  const activeRef  = useRef(0)
+  const [showCoach, setShowCoach] = useState(true)
   const maxTotal = Math.max(...DATA.map(d => d.total))
 
-  function switchTo(i: number) {
-    if (i === activeRef.current) return
-    setFading(true)
-    setTimeout(() => {
-      setActive(i)
-      activeRef.current = i
-      setFading(false)
-    }, 180)
-  }
-
   function select(i: number) {
-    // Clear any pending auto-cycle timers and hand control to user
-    timersRef.current.forEach(clearTimeout)
-    timersRef.current = []
-    setUserTookOver(true)
-    switchTo(i)
+    if (i === active) return
+    setShowCoach(false)
+    setFading(true)
+    setTimeout(() => { setActive(i); setFading(false) }, 180)
   }
-
-  // Auto-cycle on scroll into view — runs once, steps through 3 products then stops
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !autoPlayed) {
-          setAutoPlayed(true)
-          const delays = [1400, 2800, 4200]  // t=1.4s, 2.8s, 4.2s after visible
-          const targets = [1, 2, 3]           // cycle to products 1, 2, 3 then stop
-          targets.forEach((target, idx) => {
-            const t = setTimeout(() => {
-              setUserTookOver(prev => {
-                if (!prev) switchTo(target)
-                return prev
-              })
-            }, delays[idx])
-            timersRef.current.push(t)
-          })
-        }
-      },
-      { threshold: 0.3 }
-    )
-    observer.observe(section)
-    return () => {
-      observer.disconnect()
-      timersRef.current.forEach(clearTimeout)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoPlayed])
 
   const d = DATA[active]
 
@@ -242,7 +195,7 @@ function Dashboard() {
   const maxQ = Math.max(...d.questions.map(q => q.n))
 
   return (
-    <div ref={sectionRef} style={{ background: c.bg3, padding: '64px 0' }}>
+    <div style={{ background: c.bg3, padding: '64px 0' }}>
       <Wrap>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 16 }}>
           <div>
@@ -251,11 +204,8 @@ function Dashboard() {
               What customers actually struggle with — at a glance.
             </h3>
           </div>
-          <div className={(!autoPlayed || !userTookOver) ? 'dash-hint' : ''} style={{ fontFamily: 'var(--i-mono)', fontSize: 12, color: c.accent, display: 'inline-flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap', background: c.accentSoft, border: `1px solid ${c.accentLine}`, borderRadius: 999, padding: '8px 16px', letterSpacing: '0.02em', flexShrink: 0, transition: 'opacity 0.4s' }}>
-            {userTookOver
-              ? <><span>✦</span> Interactive · you&apos;re in control</>
-              : <><span>▾</span> {autoPlayed ? 'Auto-playing…' : 'Interactive · click any product line'}</>
-            }
+          <div className="dash-hint" style={{ fontFamily: 'var(--i-mono)', fontSize: 12, color: c.accent, display: 'inline-flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap', background: c.accentSoft, border: `1px solid ${c.accentLine}`, borderRadius: 999, padding: '8px 16px', letterSpacing: '0.02em', flexShrink: 0 }}>
+            <span>▾</span> Interactive · click any product line
           </div>
         </div>
 
@@ -284,8 +234,24 @@ function Dashboard() {
           {/* Body */}
           <div className="dash-body">
             {/* Left: product list */}
-            <div style={{ padding: '24px 20px', borderRight: `1px solid ${c.line}`, minWidth: 0 }}>
+            <div style={{ padding: '24px 20px', borderRight: `1px solid ${c.line}`, minWidth: 0, position: 'relative' }}>
               <div style={{ fontFamily: 'var(--i-mono)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: c.mute, marginBottom: 16 }}>Product Line</div>
+
+              {/* Click coach — points at the list, disappears on first click */}
+              {showCoach && (
+                <div style={{ position: 'absolute', top: 112, right: -18, zIndex: 20, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  {/* Ripple ring */}
+                  <div style={{ position: 'relative', width: 44, height: 44 }}>
+                    <span className="coach-ripple" style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: `2px solid ${c.accent}` }} />
+                    {/* Cursor SVG */}
+                    <svg className="coach-cursor" viewBox="0 0 24 24" width={28} height={28} style={{ position: 'absolute', top: 8, left: 8, filter: 'drop-shadow(0 2px 6px rgba(20,30,60,0.30))' }}>
+                      <path d="M4 2 L4 19 L8.6 14.6 L11.8 21.4 L14.2 20.3 L11 13.7 L17.4 13.7 Z" fill="#fff" stroke={c.accentDeep} strokeWidth="1.4" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <span style={{ fontFamily: 'var(--i-mono)', fontSize: 9, color: c.accent, letterSpacing: '0.1em', textTransform: 'uppercase', opacity: 0.8, whiteSpace: 'nowrap' }}>click a row</span>
+                </div>
+              )}
+
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 {DATA.map((row, i) => (
                   <button
@@ -417,8 +383,12 @@ export default function InternshipPage() {
         @keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(194,95,55,0.4)}70%{box-shadow:0 0 0 10px rgba(194,95,55,0)}}
         @keyframes hint-glow{0%,100%{box-shadow:0 0 0 0 rgba(194,95,55,0)}50%{box-shadow:0 0 0 6px rgba(194,95,55,0.15)}}
         @keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+        @keyframes coach-tap{0%,100%{transform:translate(0,0)}14%{transform:translate(3px,9px)}28%{transform:translate(0,0)}}
+        @keyframes coach-ripple{0%,10%{transform:scale(0.3);opacity:0}18%{opacity:0.7}50%{transform:scale(1.9);opacity:0}100%{opacity:0}}
         .live-dot{animation:pulse-dot 2s infinite}
         .dash-hint{animation:hint-glow 2.4s ease-in-out infinite}
+        .coach-cursor{animation:coach-tap 2.2s ease-in-out infinite}
+        .coach-ripple{animation:coach-ripple 2.2s ease-out infinite}
         .hero-in{animation:fade-up 0.7s ease both}
         .hero-in-2{animation:fade-up 0.7s 0.15s ease both}
         .hero-in-3{animation:fade-up 0.7s 0.3s ease both}
