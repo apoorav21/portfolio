@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 
 const stagger = {
@@ -61,9 +62,20 @@ export default function Experience() {
 
             {/* Content */}
             <div>
-              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 26, letterSpacing: '-0.01em', margin: '0 0 4px' }}>
-                Gen &amp; Agentic AI Intern
-              </h3>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap', margin: '0 0 4px' }}>
+                <Link href="/internship" style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 26, letterSpacing: '-0.01em', color: 'var(--text)', textDecoration: 'none', transition: 'color 0.15s' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--text)')}
+                >
+                  Gen &amp; Agentic AI Intern
+                </Link>
+                <Link href="/internship" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.06em', color: 'var(--accent)', background: 'rgba(var(--accent-rgb,99,102,241),0.08)', border: '1px solid var(--accent)', borderRadius: 999, padding: '3px 10px', textDecoration: 'none', whiteSpace: 'nowrap', opacity: 0.85, transition: 'opacity 0.15s' }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = '0.85')}
+                >
+                  → Case study
+                </Link>
+              </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-dim)', marginBottom: 14, letterSpacing: '0.03em' }}>
                 Caterpillar Signs Pvt. Ltd. (Group Bayport) · Gurugram
               </div>
@@ -82,6 +94,14 @@ export default function Experience() {
                   </motion.li>
                 ))}
               </ul>
+
+              {/* Case study link */}
+              <Link href="/internship" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.04em', marginBottom: 20, transition: 'gap 0.15s' }}
+                onMouseEnter={e => (e.currentTarget.style.gap = '10px')}
+                onMouseLeave={e => (e.currentTarget.style.gap = '6px')}
+              >
+                View full case study →
+              </Link>
 
               {/* Tech tags */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 8px', marginBottom: 20 }}>
