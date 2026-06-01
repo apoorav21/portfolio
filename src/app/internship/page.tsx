@@ -169,13 +169,62 @@ function Wrap({ children, style }: { children: React.ReactNode; style?: React.CS
 function Dashboard() {
   const [active, setActive] = useState(0)
   const [fading, setFading] = useState(false)
+  const [autoPlayed, setAutoPlayed] = useState(false)
+  const [userTookOver, setUserTookOver] = useState(false)
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const timersRef  = useRef<ReturnType<typeof setTimeout>[]>([])
+  const activeRef  = useRef(0)
   const maxTotal = Math.max(...DATA.map(d => d.total))
 
-  function select(i: number) {
-    if (i === active) return
+  function switchTo(i: number) {
+    if (i === activeRef.current) return
     setFading(true)
-    setTimeout(() => { setActive(i); setFading(false) }, 180)
+    setTimeout(() => {
+      setActive(i)
+      activeRef.current = i
+      setFading(false)
+    }, 180)
   }
+
+  function select(i: number) {
+    // Clear any pending auto-cycle timers and hand control to user
+    timersRef.current.forEach(clearTimeout)
+    timersRef.current = []
+    setUserTookOver(true)
+    switchTo(i)
+  }
+
+  // Auto-cycle on scroll into view — runs once, steps through 3 products then stops
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !autoPlayed) {
+          setAutoPlayed(true)
+          const delays = [1400, 2800, 4200]  // t=1.4s, 2.8s, 4.2s after visible
+          const targets = [1, 2, 3]           // cycle to products 1, 2, 3 then stop
+          targets.forEach((target, idx) => {
+            const t = setTimeout(() => {
+              setUserTookOver(prev => {
+                if (!prev) switchTo(target)
+                return prev
+              })
+            }, delays[idx])
+            timersRef.current.push(t)
+          })
+        }
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(section)
+    return () => {
+      observer.disconnect()
+      timersRef.current.forEach(clearTimeout)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoPlayed])
 
   const d = DATA[active]
 
@@ -193,7 +242,7 @@ function Dashboard() {
   const maxQ = Math.max(...d.questions.map(q => q.n))
 
   return (
-    <div style={{ background: c.bg3, padding: '64px 0' }}>
+    <div ref={sectionRef} style={{ background: c.bg3, padding: '64px 0' }}>
       <Wrap>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 16 }}>
           <div>
@@ -202,8 +251,11 @@ function Dashboard() {
               What customers actually struggle with — at a glance.
             </h3>
           </div>
-          <div className="dash-hint" style={{ fontFamily: 'var(--i-mono)', fontSize: 12, color: c.accent, display: 'inline-flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap', background: c.accentSoft, border: `1px solid ${c.accentLine}`, borderRadius: 999, padding: '8px 16px', letterSpacing: '0.02em', flexShrink: 0 }}>
-            <span>▾</span> Interactive · click any product line
+          <div className={(!autoPlayed || !userTookOver) ? 'dash-hint' : ''} style={{ fontFamily: 'var(--i-mono)', fontSize: 12, color: c.accent, display: 'inline-flex', alignItems: 'center', gap: 8, whiteSpace: 'nowrap', background: c.accentSoft, border: `1px solid ${c.accentLine}`, borderRadius: 999, padding: '8px 16px', letterSpacing: '0.02em', flexShrink: 0, transition: 'opacity 0.4s' }}>
+            {userTookOver
+              ? <><span>✦</span> Interactive · you&apos;re in control</>
+              : <><span>▾</span> {autoPlayed ? 'Auto-playing…' : 'Interactive · click any product line'}</>
+            }
           </div>
         </div>
 
