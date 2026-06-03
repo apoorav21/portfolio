@@ -131,12 +131,13 @@ export async function POST(req: NextRequest) {
     const msg   = data.choices?.[0]?.message
     const reply = msg?.content || msg?.reasoning_content || "I'm not sure how to answer that!"
 
-    // Save the full conversation including the new assistant reply (fire-and-forget)
     const fullConversation: ChatMessage[] = [
       ...messages,
       { role: 'assistant', content: reply },
     ]
-    saveChat(sessionId ?? '', fullConversation, req).catch(() => {})
+
+    // Await before returning — Lambda freezes after response, so fire-and-forget never completes
+    await saveChat(sessionId ?? '', fullConversation, req)
 
     return NextResponse.json({ message: reply })
   } catch (err) {
