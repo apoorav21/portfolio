@@ -10,7 +10,7 @@ const SUGGESTED_QUESTIONS = [
   "What AI agents have you built?",
   "Tell me about your internship",
   "What's your tech stack?",
-  "Tell me something about Apoorav beyond the resume",
+  "Tell me something about yourself beyond the resume",
 ]
 
 interface Props {
@@ -117,7 +117,7 @@ export default function ChatWindow({ onClose, onThinking }: Props) {
               fontFamily: 'var(--font-mono)',
               flexShrink: 0,
             }}>
-              E
+              A
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.06em', color: 'var(--text)', fontWeight: 500 }}>

@@ -164,7 +164,7 @@ export default function Hero() {
                   fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 15, color: '#fff',
                   flexShrink: 0,
                   boxShadow: '0 0 12px var(--accent)',
-                }}>E</div>
+                }}>A</div>
                 <div style={{ textAlign: 'left' }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.05em' }}>
                     Talk to me — AI version ✦
