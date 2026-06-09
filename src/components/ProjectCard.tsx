@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import type { Project } from '@/lib/projects'
@@ -32,6 +32,7 @@ export default function ProjectCard({ project, index }: Props) {
   const ref    = useRef(null)
   const inView = useInView(ref, { once: false, margin: '-80px' })
   const AnimationComponent = AnimationMap[project.animation]
+  const [hovered, setHovered] = useState(false)
 
   return (
     <motion.article
@@ -39,27 +40,40 @@ export default function ProjectCard({ project, index }: Props) {
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       transition={{ duration: 0.5, delay: index * 0.07, ease: 'easeOut' }}
+      onClick={() => window.open(project.github, '_blank', 'noopener,noreferrer')}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         background: 'var(--bg-2)',
-        border: '1px solid var(--line)',
+        border: `1px solid ${hovered ? 'var(--accent)' : 'var(--line)'}`,
         borderRadius: 'var(--radius)',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'row' as const,
         minHeight: 300,
-        transition: 'transform 0.2s, border-color 0.2s',
+        cursor: 'pointer',
+        transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
+        boxShadow: hovered ? '0 8px 32px rgba(0,0,0,0.1), 4px 4px 0px var(--accent)' : 'none',
+        transition: 'transform 0.2s, border-color 0.2s, box-shadow 0.2s',
         width: '100%',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-2px)'
-        e.currentTarget.style.borderColor = 'var(--accent)'
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'none'
-        e.currentTarget.style.borderColor = 'var(--line)'
+        position: 'relative',
       }}
       className="project-card-flex"
     >
+      {/* GitHub hint on hover */}
+      <div style={{
+        position: 'absolute', top: 14, right: 16,
+        fontFamily: 'var(--font-mono)', fontSize: 11.5,
+        color: 'var(--accent)',
+        display: 'flex', alignItems: 'center', gap: 4,
+        opacity: hovered ? 1 : 0,
+        transform: hovered ? 'translate(0,0)' : 'translate(-4px, 4px)',
+        transition: 'opacity 0.2s, transform 0.2s',
+        pointerEvents: 'none',
+        zIndex: 2,
+      }}>
+        Open on GitHub <ExternalLink size={11} />
+      </div>
       {/* ── Animation panel (left 42%) ──────────────────────────────── */}
       <div
         style={{
@@ -96,23 +110,16 @@ export default function ProjectCard({ project, index }: Props) {
                 {project.language}
               </span>
             </div>
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
+            <span
               style={{
                 display: 'flex', alignItems: 'center', gap: 5,
                 fontFamily: 'var(--font-mono)', fontSize: 11.5,
                 color: 'var(--accent)',
-                textDecoration: 'none',
                 letterSpacing: '0.04em',
-                transition: 'opacity 0.15s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.75')}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             >
               github.com/apoorav21/{project.id} <ExternalLink size={11} />
-            </a>
+            </span>
           </div>
 
           {/* Title */}
