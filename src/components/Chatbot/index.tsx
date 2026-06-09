@@ -161,7 +161,7 @@ export default function Chatbot() {
               letterSpacing: '0.06em',
             }}
           >
-            ask echo
+            ask me
           </motion.div>
         )}
       </AnimatePresence>

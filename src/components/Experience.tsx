@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { motion, useInView } from 'framer-motion'
 
 const stagger = {
@@ -35,6 +36,8 @@ const achievementItems = [
 export default function Experience() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const router = useRouter()
+  const [cardHovered, setCardHovered] = useState(false)
 
   return (
     <section id="experience" ref={ref} style={{ padding: '96px 0 0', scrollMarginTop: 80 }}>
@@ -53,7 +56,38 @@ export default function Experience() {
           </motion.div>
 
           {/* ── Experience card ──────────────────────────────────────── */}
-          <motion.div variants={fadeUp} style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 28, padding: '22px 0', borderTop: 'none' }} className="exp-card-grid">
+          <motion.div
+            variants={fadeUp}
+            onClick={() => router.push('/internship')}
+            onMouseEnter={() => setCardHovered(true)}
+            onMouseLeave={() => setCardHovered(false)}
+            style={{
+              display: 'grid', gridTemplateColumns: '200px 1fr', gap: 28,
+              padding: '22px 16px',
+              borderRadius: 12,
+              cursor: 'pointer',
+              border: `1px solid ${cardHovered ? 'var(--accent)' : 'transparent'}`,
+              background: cardHovered ? 'var(--bg-2)' : 'transparent',
+              boxShadow: cardHovered ? '0 4px 24px rgba(0,0,0,0.08), 4px 4px 0px var(--accent)' : 'none',
+              transform: cardHovered ? 'translateY(-2px)' : 'translateY(0)',
+              transition: 'border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.2s',
+              position: 'relative',
+            }}
+            className="exp-card-grid"
+          >
+            {/* Arrow hint on hover */}
+            <div style={{
+              position: 'absolute', top: 18, right: 18,
+              fontFamily: 'var(--font-mono)', fontSize: 13,
+              color: 'var(--accent)',
+              opacity: cardHovered ? 1 : 0,
+              transform: cardHovered ? 'translate(0, 0)' : 'translate(-4px, 4px)',
+              transition: 'opacity 0.2s, transform 0.2s',
+              pointerEvents: 'none',
+            }}>
+              View case study ↗
+            </div>
+
             {/* Meta */}
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-mute)', letterSpacing: '0.04em' }}>
               <span style={{ color: 'var(--accent)', display: 'block', marginBottom: 6 }}>Jun 2025 — Mar 2026</span>
@@ -63,18 +97,12 @@ export default function Experience() {
             {/* Content */}
             <div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap', margin: '0 0 4px' }}>
-                <Link href="/internship" style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 26, letterSpacing: '-0.01em', color: 'var(--text)', textDecoration: 'none', transition: 'color 0.15s' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--text)')}
-                >
+                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 26, letterSpacing: '-0.01em', color: cardHovered ? 'var(--accent)' : 'var(--text)', transition: 'color 0.2s' }}>
                   Gen &amp; Agentic AI Intern
-                </Link>
-                <Link href="/internship" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.06em', color: 'var(--accent)', background: 'rgba(var(--accent-rgb,99,102,241),0.08)', border: '1px solid var(--accent)', borderRadius: 999, padding: '3px 10px', textDecoration: 'none', whiteSpace: 'nowrap', opacity: 0.85, transition: 'opacity 0.15s' }}
-                  onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-                  onMouseLeave={e => (e.currentTarget.style.opacity = '0.85')}
-                >
+                </span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '0.06em', color: 'var(--accent)', background: 'rgba(var(--accent-rgb,99,102,241),0.08)', border: '1px solid var(--accent)', borderRadius: 999, padding: '3px 10px', whiteSpace: 'nowrap' }}>
                   → Case study
-                </Link>
+                </span>
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-dim)', marginBottom: 14, letterSpacing: '0.03em' }}>
                 Caterpillar Signs Pvt. Ltd. (Group Bayport) · Gurugram
@@ -94,14 +122,6 @@ export default function Experience() {
                   </motion.li>
                 ))}
               </ul>
-
-              {/* Case study link */}
-              <Link href="/internship" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.04em', marginBottom: 20, transition: 'gap 0.15s' }}
-                onMouseEnter={e => (e.currentTarget.style.gap = '10px')}
-                onMouseLeave={e => (e.currentTarget.style.gap = '6px')}
-              >
-                View full case study →
-              </Link>
 
               {/* Tech tags */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 8px', marginBottom: 20 }}>
