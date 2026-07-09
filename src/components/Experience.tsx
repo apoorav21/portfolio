@@ -151,7 +151,7 @@ export default function Experience() {
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
               {[
-                { emoji: '🎓', school: 'BRCM College of Engineering and Technology', degree: 'B.Tech in Computer Science', loc: 'Bahal, Haryana · 2022 – 2026' },
+                { emoji: '🎓', school: 'BRCM College of Engineering and Technology', degree: 'B.Tech in Computer Science · 8.0 CGPA', loc: 'Bahal, Haryana · 2022 – 2026' },
                 { emoji: '📚', school: 'O.P. Jindal Modern School', degree: '12th CBSE', loc: 'Hisar, Haryana · 2022' },
               ].map((e) => (
                 <div key={e.school} style={{ background: 'var(--bg-2)', border: '1px solid var(--line)', borderRadius: 'var(--radius)', padding: 20, display: 'flex', gap: 14, alignItems: 'flex-start' }}>

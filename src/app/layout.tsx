@@ -25,7 +25,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Apoorav Rao — AI Agent Developer',
   description:
-    'Portfolio of Apoorav Rao — CS student graduating June 2026. Building production-grade agentic systems with AWS, LangChain, and OpenAI. Currently working on TrainFlow.',
+    'Portfolio of Apoorav Rao — CS graduate (B.Tech, 8 CGPA). Building production-grade agentic systems with AWS, LangChain, and OpenAI. Currently working on TrainFlow.',
   keywords: ['Apoorav Rao', 'portfolio', 'AI agent developer', 'AWS', 'LLM', 'LangChain', 'TrainFlow'],
   authors: [{ name: 'Apoorav Rao', url: 'https://github.com/apoorav21' }],
 }

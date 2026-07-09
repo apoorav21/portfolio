@@ -53,7 +53,7 @@ export default function About() {
               </h2>
             </div>
             <p style={{ fontSize: 15, color: 'var(--text-dim)', lineHeight: 1.65, margin: 0 }}>
-              CS student graduating June 2026, building at the intersection of AI agents,
+              CS graduate (B.Tech, 8 CGPA), building at the intersection of AI agents,
               cloud infrastructure, and native mobile. My work is production-grade — not demos.
             </p>
             <p style={{ fontSize: 15, color: 'var(--text-dim)', lineHeight: 1.65, margin: '12px 0 0' }}>

@@ -84,8 +84,8 @@ export default function Hero() {
           {/* Lede */}
           <motion.div variants={item}>
             <p style={{ fontSize: 18, lineHeight: 1.65, color: 'var(--text-dim)', maxWidth: '52ch', margin: '0 auto 10px' }}>
-              I&apos;m <strong style={{ color: 'var(--text)', fontWeight: 500 }}>Apoorav Rao</strong> — CS final-year,
-              graduating June 2026. I design{' '}
+              I&apos;m <strong style={{ color: 'var(--text)', fontWeight: 500 }}>Apoorav Rao</strong> — CS grad,
+              B.Tech Computer Science, 8 CGPA. I design{' '}
               <strong style={{ color: 'var(--text)', fontWeight: 500 }}>production-grade agentic systems</strong> with
               multi-step tool-calling, real failure handling, and human-in-the-loop where it matters.
             </p>

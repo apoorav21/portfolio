@@ -26,7 +26,7 @@ GitHub:    github.com/apoorav21
 LinkedIn:  linkedin.com/in/apoorav-rao
 Location:  India (Haryana) — open to remote roles globally
 
-I'm a final-year CS student (graduating June 2026) who specialises in building
+I'm a CS graduate — B.Tech Computer Science, 8 CGPA, graduated June 2026 — who specialises in building
 AI agents, data pipelines, and cloud-native systems that actually ship to production.
 My core intersection is LLMs + cloud infrastructure — not just demos, but systems
 with real users and real numbers behind them.
@@ -37,7 +37,7 @@ EDUCATION
 
 B.Tech in Computer Science
 BRCM College of Engineering and Technology, Bahal, Haryana
-2022 – June 2026 (graduating)
+2022 – June 2026 · 8.0 CGPA (graduated)
 
 12th CBSE — O.P. Jindal Modern School, Hisar, Haryana (2022)
 
@@ -258,7 +258,7 @@ ACHIEVEMENTS & COMPETITIONS
 CAREER & AVAILABILITY
 ════════════════════════════════════════════════════
 
-Status:      Final year, graduating June 2026 — actively looking for full-time roles
+Status:      Graduated June 2026 (B.Tech CS, 8 CGPA) — actively looking for full-time roles
 Interested in: Software Engineering, Data Engineering, ML Engineering, Backend Engineering
 Excited by:  AI infrastructure, LLM tooling, agent systems, cloud-native data
 Open to:     Remote roles globally, relocating within India, and international opportunities
