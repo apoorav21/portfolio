@@ -12,6 +12,7 @@ import ProfileAgentAnimation from '@/components/animations/ProfileAgentAnimation
 import AIDuelAnimation       from '@/components/animations/AIDuelAnimation'
 import SignLanguageAnimation  from '@/components/animations/SignLanguageAnimation'
 import PaperTradingAnimation  from '@/components/animations/PaperTradingAnimation'
+import CashflowAnimation      from '@/components/animations/CashflowAnimation'
 
 const AnimationMap: Record<Project['animation'], React.ComponentType<{ isVisible: boolean }>> = {
   trainflow:    TrainFlowAnimation,
@@ -21,6 +22,7 @@ const AnimationMap: Record<Project['animation'], React.ComponentType<{ isVisible
   aiduel:       AIDuelAnimation,
   signlanguage: SignLanguageAnimation,
   papertrading: PaperTradingAnimation,
+  cashflow:     CashflowAnimation,
 }
 
 interface Props {
@@ -40,7 +42,10 @@ export default function ProjectCard({ project, index }: Props) {
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       transition={{ duration: 0.5, delay: index * 0.07, ease: 'easeOut' }}
-      onClick={() => window.open(project.github, '_blank', 'noopener,noreferrer')}
+      onClick={() => {
+        if (project.caseStudy) { window.location.href = project.caseStudy }
+        else window.open(project.github, '_blank', 'noopener,noreferrer')
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -72,7 +77,7 @@ export default function ProjectCard({ project, index }: Props) {
         pointerEvents: 'none',
         zIndex: 2,
       }}>
-        Open on GitHub <ExternalLink size={11} />
+        {project.caseStudy ? 'View case study ↗' : <><span>Open on GitHub</span><ExternalLink size={11} /></>}
       </div>
       {/* ── Animation panel (left 42%) ──────────────────────────────── */}
       <div

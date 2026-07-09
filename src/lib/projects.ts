@@ -5,7 +5,8 @@ export type AnimationType =
   | 'profileagent'
   | 'aiduel'
   | 'signlanguage'
-  | 'papertrading';
+  | 'papertrading'
+  | 'cashflow';
 
 export interface Project {
   id: string;
@@ -19,9 +20,30 @@ export interface Project {
   featured: boolean;
   animation: AnimationType;
   accentColor: string;
+  caseStudy?: string;
 }
 
 export const projects: Project[] = [
+  {
+    id: 'cash-tracking-app',
+    title: 'Cashflow',
+    description: 'Voice-driven money tracker — speak a transaction in Hindi or English and AI parses, classifies, and saves it.',
+    longDescription:
+      'An Android-first (Capacitor) personal finance app where you speak to log transactions. Amazon Transcribe streams your words live; a Lambda calls Claude on Bedrock to parse them into a structured draft you review before saving. Includes Munshi — a Hindi/English AI accounting assistant that knows your full transaction history and computes interest the Indian way (रुपया सैकड़ा). Deployed on AWS with DynamoDB, CloudFormation, and an offline-first fallback.',
+    bullets: [
+      'Live speech-to-text via Amazon Transcribe streaming — words appear as you speak',
+      'Claude (Bedrock) parses voice to structured JSON, streamed token-by-token into an editable preview',
+      'Munshi: bilingual AI assistant with full transaction context + Indian interest math (सैकड़ा convention)',
+      'DynamoDB cloud sync + offline fallback — works without internet using on-device parser',
+    ],
+    tags: ['AWS Bedrock', 'Claude', 'Amazon Transcribe', 'DynamoDB', 'Capacitor', 'Android', 'Kimi AI'],
+    github: 'https://github.com/apoorav21/cash-tracking-app',
+    language: 'JavaScript',
+    featured: true,
+    animation: 'cashflow',
+    accentColor: '#F2784B',
+    caseStudy: '/cashflow',
+  },
   {
     id: 'trainflow',
     title: 'TrainFlow',
