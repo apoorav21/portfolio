@@ -149,9 +149,11 @@ function Screenshots() {
       <div style={{ maxWidth:960, margin:'0 auto', padding:'0 28px' }}>
         <SectionHead n="01" title="In the app" sub="real screens, real data" />
       </div>
-      {/* Horizontally scrollable row of phones */}
-      <div className="cf-shots-scroll" style={{ overflowX:'auto', display:'flex', gap:24, paddingLeft:28, paddingRight:28, paddingBottom:8 }}>
-        {shots.map(s => <Phone key={s.src} src={s.src} alt={s.alt} caption={s.caption} />)}
+      {/* Horizontally scrollable row of phones — outer handles scroll, inner centers */}
+      <div className="cf-shots-scroll" style={{ overflowX:'auto', paddingBottom:8 }}>
+        <div style={{ display:'flex', gap:24, paddingLeft:28, paddingRight:28, width:'fit-content', margin:'0 auto' }}>
+          {shots.map(s => <Phone key={s.src} src={s.src} alt={s.alt} caption={s.caption} />)}
+        </div>
       </div>
     </section>
   )
