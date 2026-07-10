@@ -105,13 +105,7 @@ function Hero() {
             style={{ fontFamily:'var(--font-mono)', fontSize:13, padding:'11px 22px', background:'var(--bg-2)', color:'var(--text)', borderRadius:10, textDecoration:'none', letterSpacing:'0.04em', border:'2px solid var(--text)', boxShadow:'3px 3px 0 var(--text)' }}>
             View on GitHub ↗
           </a>
-          {/* APK_DOWNLOAD_LINK_PLACEHOLDER */}
-          <a href="#apk-placeholder" onClick={e => e.preventDefault()}
-            style={{ fontFamily:'var(--font-mono)', fontSize:13, padding:'11px 22px', background:'transparent', color:'var(--text-mute)', borderRadius:10, textDecoration:'none', letterSpacing:'0.04em', border:'1px solid var(--line)', cursor:'not-allowed', opacity:0.6 }}
-            title="APK link coming soon — attach GitHub Release URL here">
-            Download APK ↓
-          </a>
-          <Link href="/#projects"
+<Link href="/#projects"
             style={{ fontFamily:'var(--font-mono)', fontSize:13, padding:'11px 22px', background:'transparent', color:'var(--text-mute)', borderRadius:10, textDecoration:'none', letterSpacing:'0.04em', border:'1px solid var(--line)' }}>
             ← Back to projects
           </Link>
